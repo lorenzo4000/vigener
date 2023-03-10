@@ -71,22 +71,29 @@ char* dynamic_string(const char* cstr) {
     return dyn;
 }
 
+#define KEY_LENGTH 3
+
 void main(void) {
-    char* v = dynamic_string("ilcifrariodivernererutilizza");
-    char* k = dynamic_string("esempiodichiavelunga");
-    
-    char* e = encrypt(v, strlen(v), k, strlen(k));
-    printf("%s\n", e);
-    
-    char* d = decrypt(e, strlen(e), k, strlen(k));
-    printf("%s\n\n\n", d);
+    char* v = dynamic_string("gzfgd");
+    char* k = dynamic_string("aaa");
+	
+	for(int a = 1; a <= 26; a++) {
+		for(int b = 1; b <= 26; b++) {
+			for(int c = 1; c <= 26; c++) {
+				k[2] = ia(c);
+				printf("%s : ", k);
+				char* d = decrypt(v, strlen(v), k, KEY_LENGTH);
+				printf("%s\n", d);   
+			}
+			k[1] = ia(b);
+			printf("%s : ", k);
+			char* d = decrypt(v, strlen(v), k, KEY_LENGTH);
+			printf("%s\n", d);   
+		}
+		k[0] = ia(a);
+		printf("%s : ", k);
+		char* d = decrypt(v, strlen(v), k, KEY_LENGTH);
+		printf("%s\n", d);   
+	}
 
-    free(v);
-    free(k);
-
-    v = dynamic_string("gzfgd");
-    k = dynamic_string("eysee");
-
-    d = decrypt(v, strlen(v), k, strlen(k));
-    printf("%s\n", d);   
 }
